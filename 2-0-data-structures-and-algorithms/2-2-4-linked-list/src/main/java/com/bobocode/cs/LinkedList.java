@@ -154,7 +154,6 @@ public class LinkedList<T> implements List<T> {
     @Override
     public T remove(int index) {
         var res = get(index);
-
         if (index == 0) {
             head = head.next;
         } else {
