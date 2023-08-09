@@ -52,7 +52,7 @@ public class RecursiveBinarySearchTree<T extends Comparable<T>> implements Binar
     public boolean insert(T element, Node<T> root) {
         if (element.compareTo(root.element) < 0) {
             return Optional.of(root)
-                    .map(node -> root.left)
+                    .map(node -> node.left)
                     .map(node -> insert(element, node))
                     .orElseGet(() -> {
                         root.left = new Node<>(element);
@@ -61,7 +61,7 @@ public class RecursiveBinarySearchTree<T extends Comparable<T>> implements Binar
                     });
         } else if (element.compareTo(root.element) > 0) {
             return Optional.of(root)
-                    .map(node -> root.right)
+                    .map(node -> node.right)
                     .map(node -> insert(element, node))
                     .orElseGet(() -> {
                         root.right = new Node<>(element);
@@ -81,12 +81,12 @@ public class RecursiveBinarySearchTree<T extends Comparable<T>> implements Binar
     private boolean contains(T element, Node<T> root) {
         if (element.compareTo(root.element) < 0) {
             return Optional.of(root)
-                    .map(node -> root.left)
+                    .map(node -> node.left)
                     .map(node -> contains(element, node))
                     .orElse(false);
         } else if (element.compareTo(root.element) > 0) {
             return Optional.of(root)
-                    .map(node -> root.right)
+                    .map(node -> node.right)
                     .map(node -> contains(element, node))
                     .orElse(false);
         } else {
