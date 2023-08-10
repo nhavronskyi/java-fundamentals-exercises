@@ -3,6 +3,8 @@ package com.bobocode.cs;
 import java.util.Arrays;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 /**
  * {@link HashTable} is a simple Hashtable-based implementation of {@link Map} interface with some additional methods.
@@ -243,19 +245,11 @@ public class HashTable<K, V> implements Map<K, V> {
      */
     @Override
     public String toString() {
-        StringBuilder builder = new StringBuilder();
-        for (int i = 0; i < table.length; i++) {
-            String iterator = i + ": ";
-            Optional.ofNullable(table[i])
-                    .ifPresentOrElse(node -> builder.append(iterator)
-                                    .append(node.key)
-                                    .append("=")
-                                    .append(node.value)
-                                    .append("\n"),
-                            () -> builder.append(iterator)
-                                    .append("\n"));
-        }
-        return builder.toString();
+        return IntStream.range(0, table.length)
+                .mapToObj(i -> i + ": " + Optional.ofNullable(table[i])
+                        .map(node -> node.key + "=" + node.value)
+                        .orElse(""))
+                .collect(Collectors.joining("\n")) + "\n";
     }
 
     /**
