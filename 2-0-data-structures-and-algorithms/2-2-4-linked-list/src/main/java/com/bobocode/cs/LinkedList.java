@@ -18,7 +18,7 @@ import java.util.Optional;
  * @author Serhii Hryhus
  */
 public class LinkedList<T> implements List<T> {
-    private static class Node<T>{
+    private static class Node<T> {
         T element;
         Node<T> next;
 
@@ -56,7 +56,7 @@ public class LinkedList<T> implements List<T> {
         var newNode = new Node<>(element);
         Optional.ofNullable(head)
                 .ifPresentOrElse(x ->
-                        tail = tail.next = newNode,
+                                tail = tail.next = newNode,
                         () -> head = tail = newNode);
         size++;
     }
@@ -72,12 +72,12 @@ public class LinkedList<T> implements List<T> {
     public void add(int index, T element) {
         Objects.checkIndex(index, size + 1);
         var newNode = new Node<>(element);
-        if (index == 0){
+        if (index == 0) {
             newNode.next = head;
             head = newNode;
-        }else if (index == size){
+        } else if (index == size) {
             tail = tail.next = newNode;
-        }else {
+        } else {
             var prev = findNodeByIndex(--index, head);
             newNode.next = prev.next;
             prev.next = newNode;
@@ -112,7 +112,7 @@ public class LinkedList<T> implements List<T> {
      */
     @Override
     public T get(int index) {
-        Objects.checkIndex(index,size);
+        Objects.checkIndex(index, size);
         return findNodeByIndex(index, head).element;
     }
 
@@ -138,7 +138,7 @@ public class LinkedList<T> implements List<T> {
         return getHelper(tail);
     }
 
-    private T getHelper(Node<T> node){
+    private T getHelper(Node<T> node) {
         return Optional.ofNullable(node)
                 .map(n -> n.element)
                 .orElseThrow(NoSuchElementException::new);
@@ -154,13 +154,12 @@ public class LinkedList<T> implements List<T> {
     @Override
     public T remove(int index) {
         var res = get(index);
-
-        if (index == 0){
+        if (index == 0) {
             head = head.next;
-        }else{
+        } else {
             var prev = findNodeByIndex(index - 1, head);
             prev.next = prev.next.next;
-            if (index == size - 1){
+            if (index == size - 1) {
                 tail = prev;
             }
         }
