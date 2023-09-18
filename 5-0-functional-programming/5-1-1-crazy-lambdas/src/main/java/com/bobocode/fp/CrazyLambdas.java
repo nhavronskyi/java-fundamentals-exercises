@@ -28,7 +28,7 @@ public class CrazyLambdas {
      * @return a string supplier
      */
     public static Supplier<String> helloSupplier() {
-        return () -> "Hello";
+        throw new ExerciseNotCompletedException();
     }
 
     /**
@@ -37,7 +37,7 @@ public class CrazyLambdas {
      * @return a string predicate
      */
     public static Predicate<String> isEmptyPredicate() {
-        return String::isEmpty;
+        throw new ExerciseNotCompletedException();
     }
 
     /**
@@ -47,7 +47,7 @@ public class CrazyLambdas {
      * @return function that repeats Strings
      */
     public static BiFunction<String, Integer, String> stringMultiplier() {
-        return String::repeat;
+        throw new ExerciseNotCompletedException();
     }
 
     /**
@@ -57,7 +57,7 @@ public class CrazyLambdas {
      * @return function that converts adds dollar sign
      */
     public static Function<BigDecimal, String> toDollarStringFunction() {
-        return num -> "$" + num;
+        throw new ExerciseNotCompletedException();
     }
 
     /**
@@ -69,7 +69,8 @@ public class CrazyLambdas {
      * @return a string predicate
      */
     public static Predicate<String> lengthInRangePredicate(int min, int max) {
-        return s -> min <= s.length() && s.length() < max;
+        throw new ExerciseNotCompletedException();
+
     }
 
     /**
@@ -78,7 +79,7 @@ public class CrazyLambdas {
      * @return int supplier
      */
     public static IntSupplier randomIntSupplier() {
-        return () -> new Random().nextInt();
+        throw new ExerciseNotCompletedException();
     }
 
 
@@ -88,7 +89,7 @@ public class CrazyLambdas {
      * @return int operation
      */
     public static IntUnaryOperator boundedRandomIntSupplier() {
-        return operand -> new Random(operand).nextInt();
+        throw new ExerciseNotCompletedException();
     }
 
     /**
@@ -97,7 +98,7 @@ public class CrazyLambdas {
      * @return square operation
      */
     public static IntUnaryOperator intSquareOperation() {
-        return operand -> operand * operand;
+        throw new ExerciseNotCompletedException();
     }
 
     /**
@@ -106,7 +107,7 @@ public class CrazyLambdas {
      * @return binary sum operation
      */
     public static LongBinaryOperator longSumOperation() {
-        return Long::sum;
+        throw new ExerciseNotCompletedException();
     }
 
     /**
@@ -115,7 +116,7 @@ public class CrazyLambdas {
      * @return string to int converter
      */
     public static ToIntFunction<String> stringToIntConverter() {
-        return Integer::parseInt;
+        throw new ExerciseNotCompletedException();
     }
 
     /**
@@ -126,7 +127,7 @@ public class CrazyLambdas {
      * @return a function supplier
      */
     public static Supplier<IntUnaryOperator> nMultiplyFunctionSupplier(int n) {
-        return () -> operand -> n * operand;
+        throw new ExerciseNotCompletedException();
     }
 
     /**
@@ -135,7 +136,7 @@ public class CrazyLambdas {
      * @return function that composes functions with trim() function
      */
     public static UnaryOperator<Function<String, String>> composeWithTrimFunction() {
-        return stringStringFunction -> s -> stringStringFunction.apply(s.trim());
+        throw new ExerciseNotCompletedException();
     }
 
     /**
@@ -146,11 +147,7 @@ public class CrazyLambdas {
      * @return a thread supplier
      */
     public static Supplier<Thread> runningThreadSupplier(Runnable runnable) {
-        return () -> {
-            Thread thread = new Thread(runnable);
-            thread.start();
-            return thread;
-        };
+        throw new ExerciseNotCompletedException();
     }
 
     /**
@@ -159,7 +156,7 @@ public class CrazyLambdas {
      * @return a runnable consumer
      */
     public static Consumer<Runnable> newThreadRunnableConsumer() {
-        return runnable -> new Thread(runnable).start();
+        throw new ExerciseNotCompletedException();
     }
 
     /**
@@ -169,11 +166,7 @@ public class CrazyLambdas {
      * @return a function that transforms runnable into a thread supplier
      */
     public static Function<Runnable, Supplier<Thread>> runnableToThreadSupplierFunction() {
-        return runnable -> () -> {
-            Thread thread = new Thread(runnable);
-            thread.start();
-            return thread;
-        };
+        throw new ExerciseNotCompletedException();
     }
 
     /**
@@ -186,7 +179,7 @@ public class CrazyLambdas {
      * @return a binary function that receiver predicate and function and compose them to create a new function
      */
     public static BiFunction<IntUnaryOperator, IntPredicate, IntUnaryOperator> functionToConditionalFunction() {
-        return (intUnaryOperator, intPredicate) -> x -> intPredicate.test(x) ? intUnaryOperator.applyAsInt(x) : x;
+        throw new ExerciseNotCompletedException();
     }
 
     /**
@@ -197,7 +190,7 @@ public class CrazyLambdas {
      * @return a high-order function that fetches a function from a function map by a given name or returns identity()
      */
     public static BiFunction<Map<String, IntUnaryOperator>, String, IntUnaryOperator> functionLoader() {
-        return (stringIntUnaryOperatorMap, s) -> stringIntUnaryOperatorMap.getOrDefault(s, IntUnaryOperator.identity());
+        throw new ExerciseNotCompletedException();
     }
 
     /**
@@ -215,7 +208,7 @@ public class CrazyLambdas {
      * @return a comparator instance
      */
     public static <T, U extends Comparable<? super U>> Comparator<T> comparing(Function<? super T, ? extends U> mapper) {
-        return Comparator.comparing(mapper);
+        throw new ExerciseNotCompletedException();
     }
 
     /**
@@ -235,8 +228,7 @@ public class CrazyLambdas {
      */
     public static <T, U extends Comparable<? super U>> Comparator<T> thenComparing(
             Comparator<? super T> comparator, Function<? super T, ? extends U> mapper) {
-        return (o1, o2) -> comparator.compare(o1, o2) != 0 ? comparator.compare(o1, o2)
-                : mapper.apply(o1).compareTo(mapper.apply(o2));
+        throw new ExerciseNotCompletedException();
     }
 
     /**
@@ -245,7 +237,7 @@ public class CrazyLambdas {
      * @return a supplier instance
      */
     public static Supplier<Supplier<Supplier<String>>> trickyWellDoneSupplier() {
-        return () -> () -> () -> "WELL DONE!";
+        throw new ExerciseNotCompletedException();
     }
 }
 
